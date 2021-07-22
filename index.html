@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+		<link rel="stylesheet" href="dist/abel.css">
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Topic 1</h1>
+				</section>
+				<section>
+					<h1>Topic 2</h1>
+				</section>
+				<section>
+					<h1>Topic 3</h1>
+				</section>
+
+			</div>
+
+			<div id="clockdiv">
+			  <div>
+			    <span class="minutes"></span>
+			    <div class="smalltext">Minutes</div>
+			  </div>
+			  <div>
+			    <span class="seconds"></span>
+			    <div class="smalltext">Seconds</div>
+			  </div>
+			</div>
+
+		</div>
+
+
+
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+
+			Reveal.on( 'ready', event => { timer() } );
+			Reveal.on( 'slidetransitionend', event => {
+  				document.getElementsByTagName('body')[0].style.background = '';  				
+  				timer();
+  				console.log(event);
+			} );
+		</script>
+		<script src="dist/abel.js"></script>
+
+
+	</body>
+</html>

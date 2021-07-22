@@ -37,6 +37,6 @@ function timer(){
   }
 
   // const deadline = new Date(Date.parse(new Date()) + 2 * 60 * 1000);
-  const deadline = new Date(Date.parse(new Date()) + 10 * 1000);
+  const deadline = new Date(Date.parse(new Date()) + 10 * 60 * 1000);
   initializeClock('clockdiv', deadline);
 }  

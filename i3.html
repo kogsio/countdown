@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grid</title>
+    <style>
+        .content{
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+            gap: 3px;
+        }
+        div{
+            background: #DC4533; /* 992D49 */
+            padding: 10px;
+            text-align: left;
+            font-family: "Arial Narrow", Helvetica, sans-serif;
+            font-size: 4em;
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        body{
+            background: black;
+            margin: 3px;
+        }
+        #timer{
+            background:#333333;
+            text-align: center;
+            /*font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;*/
+        }
+        #container{
+            padding: 0px;
+            margin: 0px;
+        }
+        #poster{
+            display: block;
+            width: 100%; 
+        }
+
+
+    </style>
+</head>
+<body>
+    <main class="content">
+        <div id="container"><img id="poster" src="assets/img/splash.jpg"></div>        
+        <!-- <div id="container">HELLO</div>         -->
+        <div id="timer">Time</div>
+        <div id="topic0">Topic 0</div>
+        <div id="topic1">Topic 1</div>
+        <div id="topic2">Topic 2</div>
+        <div id="topic3">Topic 3</div>
+        <div id="topic4">Topic 4</div>
+        <div id="topic5">Topic 5</div>
+        <div id="topic6">Topic 6</div>
+        <div id="topic7">Topic 7</div>
+    </main>
+</body>
+
+<script>
+
+// topic counter
+var counter = -1;
+
+// count number of topics
+var topics = 0;
+var divs = document.querySelectorAll("div");
+divs.forEach(topic => {if(topic.id.includes('topic')) topics++})
+
+// active next topic on spacebar press
+document.body.onkeyup = function(e){
+    if(e.keyCode == 32){      
+        // debugging data
+        console.log('Spacebar press! Counter: ' + counter);        
+        console.log(e);
+
+        // start topic counter
+        timer();
+
+        // increase topic counter
+        counter += 1;
+
+        // active topic
+        if(counter < topics) activate(counter);
+
+        // deactivate past topic        
+        if(counter > 0 && counter <= topics) deactivate((counter-1));
+    }
+} 
+
+
+timeinterval = 0;
+function timer(){
+  clearInterval(timeinterval);
+
+  function getTimeRemaining(endtime) {
+    const total = Date.parse(endtime) - Date.parse(new Date());
+    const seconds = Math.floor((total / 1000) % 60);
+    const minutes = Math.floor((total / 1000 / 60) % 60);
+    
+    return {
+      total,
+      minutes,
+      seconds
+    };
+  }
+
+  function initializeClock(id, endtime) {
+    const clock = document.getElementById('timer');
+
+    function updateClock() {
+      const t = getTimeRemaining(endtime);
+
+      var minutes = ('0' + t.minutes).slice(-2);
+      var seconds = ('0' + t.seconds).slice(-2);
+      clock.innerHTML = minutes + ':' + seconds;
+
+      if (t.total <= 0) {
+        clearInterval(timeinterval);
+      }
+    }
+
+    updateClock();
+    timeinterval = setInterval(updateClock, 1000);
+  }
+
+  // const deadline = new Date(Date.parse(new Date()) + 2 * 60 * 1000);
+  const deadline = new Date(Date.parse(new Date()) + 10 * 1000);
+  initializeClock('clockdiv', deadline);
+}  
+
+
+// activate topic
+function activate(id){
+    var topic = document.getElementById('topic' + id);
+    topic.style.backgroundColor = '#EFBF46';
+    topic.style.color = 'black';
+
+    // set new image source
+    var poster = document.getElementById('poster');
+    poster.src = 'assets/img/' + id + '.jpg'
+}
+
+// deactivate topic
+function deactivate(id){
+    topic = document.getElementById('topic' + id);
+    topic.style.backgroundColor = '#561B15';
+    topic.style.color = '#919191';        
+}
+
+
+</script>
+
+</html>

@@ -58,6 +58,9 @@
 
 <script>
 
+// out of time sound
+var audio = new Audio('assets/audio/bell.wav');
+
 // topic counter
 var counter = -1;
 
@@ -116,6 +119,7 @@ function timer(){
 
       if (t.total <= 0) {
         clearInterval(timeinterval);
+        audio.play();
       }
     }
 

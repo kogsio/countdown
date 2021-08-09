@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Holygrail</title>
+  <style>
+
+    /* ---------------- */
+    /* ---   GRID   --- */
+    /* ---------------- */
+
+    .grid{
+        display: grid;
+        grid-template-columns: 4fr 1fr;
+        grid-template-rows: 8fr 1fr;
+        height: 100vh;
+    }
+    .content, .topics, .footer{
+        border-style: solid;
+    }
+
+    .content{
+        background: green;        
+        overflow:hidden;
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        z-index: 10;                 
+    }
+
+    .topics{
+        background: black;
+        font-size: 3vw;
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+        z-index: 9;
+
+        /* creating a nested grid */
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .footer{
+        background: orange;
+        overflow:hidden;        
+        grid-column: 1 / 3;
+        grid-row: 2 / 3;
+        z-index: 8;         
+        display:flex;
+        align-items:center;
+        font-size: 4vw;
+    }
+
+    #overlay{
+        background: black;        
+        overflow:hidden;
+        grid-column: 1 / 3;
+        grid-row: 1 / 3;
+        z-index: 14;
+        opacity: 0.98;
+        color: white; 
+        font-family: "Arial Narrow", Helvetica, sans-serif;        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 4vw;
+    }
+
+    /* -------------------------- */
+    /* ---   TITLE OVERLAYS   --- */
+    /* -------------------------- */
+
+    .contentTitle, .thumbnailTitle{
+        font-family: "Arial Narrow", Helvetica, sans-serif;
+        color: white;
+        font-weight: 600;
+        text-transform: uppercase;        
+    }
+
+    .contentTitle{
+        overflow:hidden;
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        z-index: 12;   
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 8vw;        
+    }
+
+    .contentTitleBox{
+        background: black; 
+        opacity: 0.75; 
+        color:white; padding:25px 100px 25px 100px;
+    }
+
+    .thumbnailTitle{
+        /* nested grid */
+        grid-column: 1;
+        grid-row: 1 / 2; 
+
+        /* style */
+        overflow:hidden;
+        z-index: 12;   
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 3vw;        
+    }
+
+    .thumbnailTitleBox{
+        background: black; 
+        opacity: 0.55; 
+        color:white; padding:5px 10px 5px 10px;
+    }
+
+    /* ------------------ */
+    /* ---   TOPICS   --- */
+    /* ------------------ */
+
+
+    .topic, .topicFooter, #timer{
+        font-family: "Arial Narrow", Helvetica, sans-serif;
+        color: white;
+        font-weight: 600;
+        text-transform: uppercase;        
+        margin-top: 2px;
+        margin-bottom: 2px;        
+    }
+
+    .topic{
+        background: #DC4533;
+        padding: 5px;
+        text-align: left;
+    }
+
+    .topicFooter{
+        margin-left: 20px;
+    }
+
+    #thumbnail{
+        display: block;
+        width: 100%; 
+
+        /* nested grid */
+        grid-column: 1;
+        grid-row: 1 / 2; 
+    }
+
+    #timer{
+        background:#333333;
+        text-align: center;
+
+        /* nested grid */
+        grid-column: 1;
+        grid-row: 2 / 3;         
+    }
+
+    #topicList{
+        /* nested grid */
+        grid-column: 1;
+        grid-row: 3 / 4;
+    }
+
+
+    /* ----------------- */
+    /* ---   OTHER   --- */
+    /* ----------------- */
+
+
+    .image{
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    body{
+        background: black;
+        margin: 0px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="grid">
+
+    <!-- -------------------------------------------- -->
+    <!--               FULL SCREEN OVERLAY            -->
+    <!-- -------------------------------------------- -->
+    <div id="overlay">
+        <div>
+            Press "arrow down" key to start.<br><br>
+            <div style="font-size: 2vw;">
+                MENU:<br>
+                arrow down - start<br>
+                arrow right - next<br>    
+                arrow left - back<br>
+                space bar - green screen<br>
+                arrow up -  end, Q & A
+            </div>
+        </div>
+    </div>
+
+    <!-- -------------------------------------------- -->
+    <!--               CONTENT PANE                   -->
+    <!-- -------------------------------------------- -->
+    <div class="contentTitle" id="contentTitle">
+            <div class="contentTitleBox" id="contentTitleBox">
+                Abel & John 
+            </div>
+    </div>
+    <div class="content" id="content"><img src="assets/img/start.jpg" id="contentImage" class="image" /></div>
+
+    <!-- -------------------------------------------- -->
+    <!--               TOPCS PANE                     -->
+    <!-- -------------------------------------------- -->    
+    <div class="topics" id="topics">
+
+          <div class="thumbnailTitle">
+                <div class="thumbnailTitleBox">
+                    Abel & John
+                </div>
+          </div>
+
+          <img id="thumbnail" src="assets/img/thumbnails/splash.jpg">
+
+          <div id="timer">Time</div>
+
+          <div id="topicList">
+              <div class="topic" id="topic0" time="10">Topic 0</div>
+              <div class="topic" id="topic1" time="10">Topic 1</div>
+              <div class="topic" id="topic2" time="10">Topic 2</div>
+              <div class="topic" id="topic3" time="10">Topic 3</div>
+              <div class="topic" id="topic4" time="10">Topic 4</div>
+              <div class="topic" id="topic5" time="10">Topic 5</div>
+              <div class="topic" id="topic6" time="10">Topic 6</div>
+              <div class="topic" id="topic7" time="10">Topic 7</div> 
+          </div>          
+        
+    </div>
+
+    <!-- -------------------------------------------- -->
+    <!--               FOOTER PANE                    -->
+    <!-- -------------------------------------------- -->        
+    <div class="footer">
+        <div class="topicFooter">Full Description of Topic</div>        
+    </div>
+
+</div>
+
+</body>    
+
+<script>
+
+// out of time sound
+var audio = new Audio('assets/audio/bell.mp3');
+
+// topic counter
+var counter = -1;
+
+// count number of topics
+var topics = 0;
+var divs = document.querySelectorAll("div");
+divs.forEach(topic => {if(topic.id.includes('topic')) topics++})
+
+// active next topic on spacebar press
+document.body.onkeyup = function(e){
+
+    // --------------------------------------
+    //    MENU:
+    //      arrow down  (40) - start
+    //      arrow right (39) - next    
+    //      arrow left  (37) - back
+    //      space bar   (32) - green screen
+    //      arrow up    (33) -  end, Q & A
+    // --------------------------------------
+
+
+    // arrow down, start show 
+    if(e.keyCode == 40){
+        document.getElementById('overlay').style.visibility = 'hidden';
+    } 
+
+    // arrow right, go to next slide
+    if(e.keyCode == 39){      
+        // debugging data
+        console.log('Spacebar press! Counter: ' + counter);        
+        console.log(e);
+
+        // increase topic counter
+        counter += 1;
+
+        // active topic
+        if(counter < topics) activate(counter);
+
+        // deactivate past topic        
+        if(counter > 0 && counter <= topics) deactivate((counter-1));
+    }
+
+    // space bar, go to green screen
+    if(e.keyCode == 32){
+        document.getElementById('contentImage').style.visibility = 'hidden';
+        document.getElementById('contentTitle').style.visibility = 'hidden';
+        document.getElementById('content').style.backgroundColor = '#00ff00';        
+        document.getElementById('content').style.opacity = 1;        
+    } 
+
+    // arrow up, end show, Q&A
+    if(e.keyCode == 38){
+        console.log('arrow up');
+        document.getElementById('overlay').style.visibility = 'visible';
+        document.getElementById('overlay').innerText = 'Q&A';
+    } 
+
+} 
+
+
+timeinterval = 0;
+function timer(time){
+  clearInterval(timeinterval);
+
+  function getTimeRemaining(endtime) {
+    const total = Date.parse(endtime) - Date.parse(new Date());
+    const seconds = Math.floor((total / 1000) % 60);
+    const minutes = Math.floor((total / 1000 / 60) % 60);
+    
+    return {
+      total,
+      minutes,
+      seconds
+    };
+  }
+
+  function initializeClock(id, endtime) {
+    const clock = document.getElementById('timer');
+
+    function updateClock() {
+      const t = getTimeRemaining(endtime);
+
+      var minutes = ('0' + t.minutes).slice(-2);
+      var seconds = ('0' + t.seconds).slice(-2);
+      clock.innerHTML = minutes + ':' + seconds;
+
+      if (t.total <= 0) {
+        clearInterval(timeinterval);
+        audio.play();
+      }
+    }
+
+    updateClock();
+    timeinterval = setInterval(updateClock, 1000);
+  }
+
+  // const deadline = new Date(Date.parse(new Date()) + 2 * 60 * 1000);
+  const deadline = new Date(Date.parse(new Date()) + time * 1000);
+  initializeClock('clockdiv', deadline);
+}  
+
+
+// activate topic
+function activate(id){
+    var topic = document.getElementById('topic' + id);
+    topic.style.backgroundColor = '#EFBF46';
+    topic.style.color = 'black';
+
+    // set new image source
+    var thumbnail = document.getElementById('thumbnail');
+    thumbnail.src = 'assets/img/thumbnails/' + id + '.jpg'
+
+    // set content pane image source
+    var contentImage = document.getElementById('contentImage');
+    contentImage.src = 'assets/img/topics/' + id + '.jpg'
+
+    // make elements visible
+    document.getElementById('contentImage').style.visibility = 'visible';
+    document.getElementById('contentTitle').style.visibility = 'visible';
+
+
+    // start topic counter
+    time = topic.getAttribute('time');
+    timer(time);
+}
+
+// deactivate topic
+function deactivate(id){
+    topic = document.getElementById('topic' + id);
+    topic.style.backgroundColor = '#561B15';
+    topic.style.color = '#919191';        
+}
+    
+</script>
+
+</html>

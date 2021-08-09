@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Grid</title>
+  <style>
+
+    /* --- GRID STYLES --- */
+
+    .grid{
+        display: grid;
+        grid-template-columns: 4fr 1fr;
+        grid-template-rows: 8fr 1fr;
+        height: 100vh;
+    }
+    .content, .topics, .footer{
+        border-style: solid;
+    }
+
+    .content{
+        background: green;        
+        overflow:hidden;
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        z-index: 10;                 
+    }
+
+    .topics{
+        background: silver;
+        font-size: 3vw;
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+        z-index: 9;         
+    }
+
+    .footer{
+        background: orange;
+        overflow:hidden;        
+        grid-column: 1 / 3;
+        grid-row: 2 / 3;
+        z-index: 8;         
+        display:flex;
+        align-items:center;
+        font-size: 4vw;
+    }
+
+    .overlay{
+        background: grey;        
+        overflow:hidden;
+        grid-column: 1 / 3;
+        grid-row: 1 / 3;
+        z-index: 11;   
+        opacity: 0.75; 
+    }
+
+    .contentTitle{
+        overflow:hidden;
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        z-index: 12;   
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 8vw;        
+    }
+
+
+    .image{
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    body{
+        background: black;
+        margin: 0px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="grid">
+    <!-- <div class="overlay"></div> -->
+    <div class="contentTitle">
+            <div style="background: black; opacity: 0.75; color:white; padding:25px 100px 25px 100px">
+                Title Title Title
+            </div>
+    </div>
+    <div class="content">
+        <img src="assets/img/start.jpg" id="content" class="image" />
+    </div>
+    <div class="topics">Topics</div>
+    <div class="footer">Footer</div>
+
+</div>
+
+</body>    
+
+</html>

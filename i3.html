@@ -43,23 +43,22 @@
 <body>
     <main class="content">
         <div id="container"><img id="poster" src="assets/img/splash.jpg"></div>        
-        <!-- <div id="container">HELLO</div>         -->
         <div id="timer">Time</div>
-        <div id="topic0">Topic 0</div>
-        <div id="topic1">Topic 1</div>
-        <div id="topic2">Topic 2</div>
-        <div id="topic3">Topic 3</div>
-        <div id="topic4">Topic 4</div>
-        <div id="topic5">Topic 5</div>
-        <div id="topic6">Topic 6</div>
-        <div id="topic7">Topic 7</div>
+        <div id="topic0" time="10">Topic 0</div>
+        <div id="topic1" time="10">Topic 1</div>
+        <div id="topic2" time="10">Topic 2</div>
+        <div id="topic3" time="10">Topic 3</div>
+        <div id="topic4" time="10">Topic 4</div>
+        <div id="topic5" time="10">Topic 5</div>
+        <div id="topic6" time="10">Topic 6</div>
+        <div id="topic7" time="10">Topic 7</div>
     </main>
 </body>
 
 <script>
 
 // out of time sound
-var audio = new Audio('assets/audio/bell.wav');
+var audio = new Audio('assets/audio/bell.mp3');
 
 // topic counter
 var counter = -1;
@@ -76,9 +75,6 @@ document.body.onkeyup = function(e){
         console.log('Spacebar press! Counter: ' + counter);        
         console.log(e);
 
-        // start topic counter
-        timer();
-
         // increase topic counter
         counter += 1;
 
@@ -92,7 +88,7 @@ document.body.onkeyup = function(e){
 
 
 timeinterval = 0;
-function timer(){
+function timer(time){
   clearInterval(timeinterval);
 
   function getTimeRemaining(endtime) {
@@ -128,7 +124,7 @@ function timer(){
   }
 
   // const deadline = new Date(Date.parse(new Date()) + 2 * 60 * 1000);
-  const deadline = new Date(Date.parse(new Date()) + 10 * 1000);
+  const deadline = new Date(Date.parse(new Date()) + time * 1000);
   initializeClock('clockdiv', deadline);
 }  
 
@@ -142,6 +138,10 @@ function activate(id){
     // set new image source
     var poster = document.getElementById('poster');
     poster.src = 'assets/img/' + id + '.jpg'
+
+    // start topic counter
+    time = topic.getAttribute('time');
+    timer(time);
 }
 
 // deactivate topic

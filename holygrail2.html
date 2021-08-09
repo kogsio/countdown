@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Holy Grail</title>
+  <style>
+
+    /* --- GRID STYLES --- */
+
+    .grid{
+        display: grid;
+        grid-template-columns: 4fr 1fr;
+        grid-template-rows: 10fr 1fr;
+        height: 100vh;
+    }
+    .bigpane, .topics, .footer{
+        border-style: solid;
+        font-size: 3vw;
+    }
+    .footer{
+        background: orange;
+        grid-column: 1 / 5;
+        display:flex;
+        align-items:center;
+    }
+    .bigpane{
+        background: green;        
+        overflow:hidden;          
+    }
+    .topics{
+        background: black;
+    }
+    body{
+        background: black;
+        margin: 0px;
+    }
+
+    /* --- TOPICS STYLES --- */
+
+    .topic, .fullTopic, #timer{
+        font-family: "Arial Narrow", Helvetica, sans-serif;
+        color: white;
+        font-weight: 600;
+        text-transform: uppercase;        
+        margin-top: 2px;
+        margin-bottom: 2px;        
+    }
+    .topic{
+        background: #DC4533;
+        padding: 5px;
+        text-align: left;
+    }
+    .fullTopic{
+        margin-left: 20px;
+    }
+    #timer{
+      background:#333333;
+      text-align: center;
+    }
+    #thumbnail{
+      display: block;
+      width: 100%; 
+    }
+
+    /*    
+        #thumbnailContainer{
+          padding: 0px;
+          margin: 0px;
+        }
+    */
+
+    /* --- MAIN PANE STYLES --- */
+
+    .maincontainer{
+
+    }
+    .maincontent{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden            
+    }
+    .maincontent img {
+        flex-shrink: 0;
+        min-width: 100%;
+        min-height: 100%
+    }
+
+    /* not working - not filling pane */
+    .maincontent video {
+        flex-shrink: 0;
+        /*object-fit: cover;*/
+        /*object-fit: fill;*/
+        min-width: 100%;
+        min-height: 100%
+    }
+
+    /* --- OVERLAY - change name of style to overlay --- */
+
+    #supergrid{
+        grid-column: 1 / 5;
+        grid-row: 1 / 11;
+        min-width: 100%;
+        min-height: 100%          
+    }
+
+  </style>
+</head>
+<body>
+    <!-- <div id="supergrid" style="content:url(assets/img/start.jpg);"> -->
+    <div class="grid">
+        <div class="bigpane">
+
+          <div class="maincontainer">
+
+            <div class="maincontent">
+
+              <img src="assets/img/start.jpg" id="bigpane" alt="journey map" />
+<!--               
+              <video controls height="1280px" width="1920px" style="object-fit: fill;">
+                <source src="assets/img/passwords.mp4" type="video/mp4">
+              </video>
+ -->
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+        <div class="topics">
+          <div><img id="thumbnail" src="assets/img/splash.jpg"></div>        
+          <div id="timer">Time</div>
+          <div class="topic" id="topic0" time="10">Topic 0</div>
+          <div class="topic" id="topic1" time="10">Topic 1</div>
+          <div class="topic" id="topic2" time="10">Topic 2</div>
+          <div class="topic" id="topic3" time="10">Topic 3</div>
+          <div class="topic" id="topic4" time="10">Topic 4</div>
+          <div class="topic" id="topic5" time="10">Topic 5</div>
+          <div class="topic" id="topic6" time="10">Topic 6</div>
+          <div class="topic" id="topic7" time="10">Topic 7</div>          
+        </div>
+
+        <div class="footer">
+          <div class="fullTopic">Full Description of Topic</div>
+        </div>
+    </div>
+    </div>
+</body>
+
+<script>
+
+// out of time sound
+var audio = new Audio('assets/audio/bell.mp3');
+
+// topic counter
+var counter = -1;
+
+// count number of topics
+var topics = 0;
+var divs = document.querySelectorAll("div");
+divs.forEach(topic => {if(topic.id.includes('topic')) topics++})
+
+// active next topic on spacebar press
+document.body.onkeyup = function(e){
+    if(e.keyCode == 32){      
+        // debugging data
+        console.log('Spacebar press! Counter: ' + counter);        
+        console.log(e);
+
+        // increase topic counter
+        counter += 1;
+
+        // active topic
+        if(counter < topics) activate(counter);
+
+        // deactivate past topic        
+        if(counter > 0 && counter <= topics) deactivate((counter-1));
+    }
+} 
+
+
+timeinterval = 0;
+function timer(time){
+  clearInterval(timeinterval);
+
+  function getTimeRemaining(endtime) {
+    const total = Date.parse(endtime) - Date.parse(new Date());
+    const seconds = Math.floor((total / 1000) % 60);
+    const minutes = Math.floor((total / 1000 / 60) % 60);
+    
+    return {
+      total,
+      minutes,
+      seconds
+    };
+  }
+
+  function initializeClock(id, endtime) {
+    const clock = document.getElementById('timer');
+
+    function updateClock() {
+      const t = getTimeRemaining(endtime);
+
+      var minutes = ('0' + t.minutes).slice(-2);
+      var seconds = ('0' + t.seconds).slice(-2);
+      clock.innerHTML = minutes + ':' + seconds;
+
+      if (t.total <= 0) {
+        clearInterval(timeinterval);
+        audio.play();
+      }
+    }
+
+    updateClock();
+    timeinterval = setInterval(updateClock, 1000);
+  }
+
+  // const deadline = new Date(Date.parse(new Date()) + 2 * 60 * 1000);
+  const deadline = new Date(Date.parse(new Date()) + time * 1000);
+  initializeClock('clockdiv', deadline);
+}  
+
+
+// activate topic
+function activate(id){
+    var topic = document.getElementById('topic' + id);
+    topic.style.backgroundColor = '#EFBF46';
+    topic.style.color = 'black';
+
+    // set new image source
+    var thumbnail = document.getElementById('thumbnail');
+    thumbnail.src = 'assets/img/' + id + '.jpg'
+
+    // set big pane image source
+    var thumbnail = document.getElementById('bigpane');
+    thumbnail.src = 'assets/img/topics/' + id + '.jpg'
+
+    // start topic counter
+    time = topic.getAttribute('time');
+    timer(time);
+}
+
+// deactivate topic
+function deactivate(id){
+    topic = document.getElementById('topic' + id);
+    topic.style.backgroundColor = '#561B15';
+    topic.style.color = '#919191';        
+}
+
+
+</script>
+
+</html>

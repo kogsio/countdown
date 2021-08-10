@@ -1,13 +1,20 @@
+// ---------------------
+// ---   INTIALIZE   ---
+// ---------------------
+
+
 // out of time sound
 var audio = new Audio('assets/audio/bell.mp3');
 
 // topic counter
 var counter = -1;
 
-// count number of topics
+// number of topics
 var topics = 0;
 var list = document.getElementById('topicList');
 var divs = list.querySelectorAll("div");
+
+// count number of topics
 divs.forEach(topic => {if(topic.id.includes('topic')) topics++})
 
 
@@ -17,19 +24,18 @@ divs.forEach(topic =>{
 })
 
 
+// --------------------------------------
+//    NATIVATION MENU:
+//      arrow down  (40) - start
+//      arrow right (39) - next    
+//      arrow left  (37) - back
+//      space bar   (32) - green screen
+//      arrow up    (33) -  end, Q & A
+// --------------------------------------
+
 
 // active next topic on spacebar press
 document.body.onkeyup = function(e){
-
-    // --------------------------------------
-    //    MENU:
-    //      arrow down  (40) - start
-    //      arrow right (39) - next    
-    //      arrow left  (37) - back
-    //      space bar   (32) - green screen
-    //      arrow up    (33) -  end, Q & A
-    // --------------------------------------
-
 
     // arrow down, start show 
     if(e.keyCode == 40){
@@ -39,11 +45,14 @@ document.body.onkeyup = function(e){
     // arrow right, go to next slide
     if(e.keyCode == 39){      
         // debugging data
-        console.log('Spacebar press! Counter: ' + counter);        
+        console.log('arrow right, counter: ', counter);        
         console.log(e);
 
-        // increase topic counter
+        // increase topic counter        
         counter += 1;
+
+        // if out of bounds, set at limit 
+        if (counter >= topics) counter = topics - 1;
 
         // active topic
         if(counter < topics) activate(counter);
@@ -60,6 +69,15 @@ document.body.onkeyup = function(e){
         document.getElementById('content').style.opacity = 1;        
     } 
 
+    // arrow left, go back
+    if(e.keyCode == 37){
+        console.log('arrow left');
+        reset(counter);
+        if(counter < 1) counter = -1;
+        else if(counter >= 1) counter -= 2;
+        document.body.dispatchEvent( new KeyboardEvent("keyup", {key: "ArrowRight", keyCode: 39 }));
+    } 
+
     // arrow up, end show, Q&A
     if(e.keyCode == 38){
         console.log('arrow up');
@@ -68,6 +86,10 @@ document.body.onkeyup = function(e){
     } 
 
 } 
+
+// -----------------
+// ---   TIMER   ---
+// -----------------
 
 
 timeinterval = 0;
@@ -112,6 +134,11 @@ function timer(time){
 }  
 
 
+// --------------------------------------
+// ---   ACTIVATE/DEACTIVATE TOPICS   ---
+// --------------------------------------
+
+
 // activate topic
 function activate(id){
     var topic = document.getElementById('topic' + id);
@@ -152,4 +179,12 @@ function deactivate(id){
     topic = document.getElementById('topic' + id);
     topic.style.backgroundColor = '#561B15';
     topic.style.color = '#919191';        
+}
+
+// reset topic
+function reset(id){
+    clearInterval(timeinterval);    
+    topic = document.getElementById('topic' + id);
+    topic.style.backgroundColor = '#DC4533';
+    topic.style.color = 'white';
 }

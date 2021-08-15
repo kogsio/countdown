@@ -4,119 +4,125 @@
   <title>Holy Grail</title>
   <style>
 
-      /* --- GRID STYLES --- */
+    /* --- GRID STYLES --- */
 
-      .grid{
-          display: grid;
-          grid-template-columns: 4fr 1fr;
-          grid-template-rows: 10fr 1fr;
-          height: 100vh;
-      }
-      aside, article, footer{
-          border-style: solid;
-          background: silver;
-          font-size: 3vw;
-      }
-      article{
+    .grid{
+        display: grid;
+        grid-template-columns: 4fr 1fr;
+        grid-template-rows: 10fr 1fr;
+        height: 100vh;
+    }
+    .bigpane, .topics, .footer{
+        border-style: solid;
+        font-size: 3vw;
+    }
+    .footer{
+        background: orange;
+        grid-column: 1 / 5;
+        display:flex;
+        align-items:center;
+    }
+    .bigpane{
+        background: green;        
+        overflow:hidden;          
+    }
+    .topics{
         background: black;
-      }
-      footer{
-          background: orange;
-          grid-column: 1 / 5;
-      }
-      aside{
-          /*height: 100%; */
-          /*width: 100%; */
-          overflow:hidden;          
-      }
-      body{
+    }
+    body{
         background: black;
         margin: 0px;
-      }
+    }
 
-      /* --- TOPICS STYLES --- */
+    /* --- TOPICS STYLES --- */
 
-      .topic{
-          background: #DC4533; /* 992D49 */
-          padding: 5px;
-          margin-top: 2px;
-          margin-bottom: 2px;
-          text-align: left;
-          font-family: "Arial Narrow", Helvetica, sans-serif;
-          color: white;
-          font-weight: 600;
-          text-transform: uppercase;
-      }
-      .fullTopic{
-          text-align: left;
-          font-family: "Arial Narrow", Helvetica, sans-serif;
-          color: white;
-          padding: 10px;
-          font-weight: 600;
-          text-transform: uppercase;
-      }
-      #timer{
-          background:#333333;
-          text-align: center;
-          color: white;
-          font-family: "Arial Narrow", Helvetica, sans-serif;
-          margin-top: 2px;
-          margin-bottom: 2px;          
-      }
-      #container{
+    .topic, .fullTopic, #timer{
+        font-family: "Arial Narrow", Helvetica, sans-serif;
+        color: white;
+        font-weight: 600;
+        text-transform: uppercase;        
+        margin-top: 2px;
+        margin-bottom: 2px;        
+    }
+    .topic{
+        background: #DC4533;
+        padding: 5px;
+        text-align: left;
+    }
+    .fullTopic{
+        margin-left: 20px;
+    }
+    #timer{
+      background:#333333;
+      text-align: center;
+    }
+    #thumbnail{
+      display: block;
+      width: 100%; 
+    }
+
+    /*    
+        #thumbnailContainer{
           padding: 0px;
           margin: 0px;
-      }
-      #poster{
-          display: block;
-          width: 100%; 
-      }
+        }
+    */
 
-      /* --- MAIN PANE STYLES --- */
+    /* --- MAIN PANE STYLES --- */
 
-      .maincontainer{
+    .maincontainer{
 
-      }
-      .maincontent{
+    }
+    .maincontent{
         display: flex;
         justify-content: center;
         align-items: center;
         overflow: hidden            
-      }
-      .maincontent img {
-          flex-shrink: 0;
-          min-width: 100%;
-          min-height: 100%
-      }
+    }
+    .maincontent img {
+        flex-shrink: 0;
+        min-width: 100%;
+        min-height: 100%
+    }
 
-      /* not working - not filling pane */
-      .maincontent video {
-          flex-shrink: 0;
-          /*object-fit: cover;*/
-          /*object-fit: fill;*/
-          min-width: 100%;
-          min-height: 100%
-      }
-      #supergrid{
-          grid-column: 1 / 5;
-          grid-row: 1 / 11;
-          min-width: 100%;
-          min-height: 100%          
-      }
+    /* not working - not filling pane */
+    .maincontent video {
+        flex-shrink: 0;
+        /*object-fit: cover;*/
+        /*object-fit: fill;*/
+        min-width: 100%;
+        min-height: 100%
+    }
 
+    /* --- OVERLAY - change name of style to overlay --- */
+
+    #supergrid{
+        grid-column: 1 / 5;
+        grid-row: 1 / 11;
+        min-width: 100%;
+        min-height: 100%          
+    }
+
+/* Centered text */
+.overlayThumbnailTitle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
   </style>
 </head>
 <body>
     <!-- <div id="supergrid" style="content:url(assets/img/start.jpg);"> -->
     <div class="grid">
-        <aside>
+        <div class="bigpane">
 
           <div class="maincontainer">
 
             <div class="maincontent">
 
-              <img src="../assets/img/onair.jpg" alt="journey map" />
+              <img src="../assets/img/start.jpg" id="bigpane" alt="journey map" />
 <!--               
               <video controls height="1280px" width="1920px" style="object-fit: fill;">
                 <source src="assets/img/passwords.mp4" type="video/mp4">
@@ -127,11 +133,17 @@
           </div>
 
 
-        </aside>
+        </div>
 
 
-        <article>
-          <div id="container"><img id="poster" src="../assets/img/splash.jpg"></div>        
+        <div class="topics">
+
+
+
+          <div>
+            <img id="thumbnail" src="../assets/img/splash.jpg">
+            <div class="overlayThumbnailTitle">Centered</div>
+          </div>        
           <div id="timer">Time</div>
           <div class="topic" id="topic0" time="10">Topic 0</div>
           <div class="topic" id="topic1" time="10">Topic 1</div>
@@ -141,11 +153,11 @@
           <div class="topic" id="topic5" time="10">Topic 5</div>
           <div class="topic" id="topic6" time="10">Topic 6</div>
           <div class="topic" id="topic7" time="10">Topic 7</div>          
-        </article>
+        </div>
 
-        <footer>
+        <div class="footer">
           <div class="fullTopic">Full Description of Topic</div>
-        </footer>
+        </div>
     </div>
     </div>
 </body>
@@ -231,8 +243,12 @@ function activate(id){
     topic.style.color = 'black';
 
     // set new image source
-    var poster = document.getElementById('poster');
-    poster.src = 'assets/img/' + id + '.jpg'
+    var thumbnail = document.getElementById('thumbnail');
+    thumbnail.src = 'assets/img/' + id + '.jpg'
+
+    // set big pane image source
+    var thumbnail = document.getElementById('bigpane');
+    thumbnail.src = 'assets/img/topics/' + id + '.jpg'
 
     // start topic counter
     time = topic.getAttribute('time');

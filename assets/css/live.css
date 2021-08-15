@@ -5,7 +5,7 @@
     .grid{
         display: grid;
         grid-template-columns: 4fr 1fr;
-        grid-template-rows: 8fr 1fr;
+        grid-template-rows: 7fr 1fr;
         height: 100vh;
     }
     .content, .topics, .footer{
@@ -30,6 +30,7 @@
         /* creating a nested grid */
         display: grid;
         grid-template-columns: 1fr;
+        grid-template-rows: 25% 7% 68%;
     }
 
     .footer{
@@ -86,11 +87,8 @@
         color:white; padding:25px 100px 25px 100px;
     }
 
-    .thumbnailTitle{
-        /* nested grid */
-        grid-column: 1;
-        grid-row: 1 / 2; 
 
+    .thumbnailTitle{
         /* style */
         overflow:hidden;
         z-index: 12;   
@@ -98,12 +96,20 @@
         justify-content: center;
         align-items: center;
         font-size: 3vw;        
+
+        /* nested grid */
+        grid-column: 1;
+        grid-row: 1 / 2; 
     }
 
     .thumbnailTitleBox{
         background: black; 
         opacity: 0.55; 
         color:white; padding:5px 10px 5px 10px;
+
+        /* nested grid */
+        grid-column: 1;
+        grid-row: 1 / 2; 
     }
 
     /* ------------------ */
@@ -145,13 +151,13 @@
 
         /* nested grid */
         grid-column: 1;
-        grid-row: 2 / 3;         
+        grid-row: 2 / 3; 
     }
 
     #topicList{
         /* nested grid */
         grid-column: 1;
-        grid-row: 3 / 4;
+        grid-row: 3 / 4; 
     }
 
 

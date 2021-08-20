@@ -4,12 +4,19 @@
   <title>Grid</title>
   <style>
 
-    /* --- GRID STYLES --- */
+    body{
+        background: black;
+        margin: 0px;
+    }
+
+    /* ---------------- */
+    /* ---   GRID   --- */
+    /* ---------------- */
 
     .grid{
         display: grid;
         grid-template-columns: 4fr 1fr;
-        grid-template-rows: 8fr 1fr;
+        grid-template-rows: 7fr 1fr;
         height: 100vh;
     }
     .content, .topics, .footer{
@@ -17,30 +24,30 @@
     }
 
     .content{
-        background: green;        
         overflow:hidden;
         grid-column: 1 / 2;
-        grid-row: 1 / 2;
-        z-index: 10;                 
-    }
-
-    .topics{
-        background: silver;
-        font-size: 3vw;
-        grid-column: 2 / 3;
         grid-row: 1 / 2;
         z-index: 9;         
     }
 
+    .topics{
+        font-size: 3vw;
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+        z-index: 8;         
+    }
+
     .footer{
         background: orange;
+        font-size: 4vw;        
         overflow:hidden;        
         grid-column: 1 / 3;
         grid-row: 2 / 3;
-        z-index: 8;         
+        border-color: black;
+        z-index: 7;
+
         display:flex;
         align-items:center;
-        font-size: 4vw;
     }
 
     .overlay{
@@ -48,21 +55,32 @@
         overflow:hidden;
         grid-column: 1 / 3;
         grid-row: 1 / 3;
-        z-index: 11;   
+        z-index: 12;   
         opacity: 0.75; 
     }
+
+    /* ------------------- */
+    /* ---   CONTENT   --- */
+    /* ------------------- */
 
     .contentTitle{
         overflow:hidden;
         grid-column: 1 / 2;
         grid-row: 1 / 2;
-        z-index: 12;   
+        z-index: 11;   
         display: flex;
         justify-content: center;
         align-items: center;
         font-size: 8vw;        
+        font-family: "Arial Narrow", Helvetica, sans-serif;                
     }
 
+    .contentTitleBox{
+        background: black; 
+        opacity: 0.75; 
+        color:white; 
+        padding:25px 100px 25px 100px        
+    }
 
     .image{
         width: 100%;
@@ -70,9 +88,61 @@
         object-fit: cover;
     }
 
-    body{
-        background: black;
-        margin: 0px;
+
+    /* ------------------ */
+    /* ---   TOPICS   --- */
+    /* ------------------ */
+
+    .topic, #timer, .footer, .thumbnailCaption{
+        font-family: "Arial Narrow", Helvetica, sans-serif;
+        color: white;
+        font-weight: 600;
+        text-transform: uppercase;        
+        margin-top: 2px;
+        margin-bottom: 2px;        
+    }
+
+    .topic{
+        background: #DC4533;
+        padding: 5px;        
+        text-align: left;
+    }
+    #timer{
+        background:#333333;
+        text-align: center;
+    }
+
+    .footerTitle{
+        margin-left: 50px;        
+    }
+
+    .thumbnailContainer{
+        display: flex;
+    }
+    .thumbnailWrapper{
+        margin: 0;
+        position: relative;
+        width: 100%;
+    }
+    .thumbnail{
+        display: block;
+        width: 100%;
+    }
+    .thumbnailCaption{
+        position: absolute;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 10px;
+
+        /* text over image */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);       
+    }
+
+    video{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;    
     }
 
   </style>
@@ -82,16 +152,46 @@
 
 <div class="grid">
     <!-- <div class="overlay"></div> -->
-    <div class="contentTitle">
-            <div style="background: black; opacity: 0.75; color:white; padding:25px 100px 25px 100px">
+
+<!--     <div class="contentTitle">
+            <div class="contentTitleBox">
                 Title Title Title
             </div>
     </div>
-    <div class="content">
-        <img src="assets/img/start.jpg" id="content" class="image" />
+ -->
+
+<!--     <div class="content">
+        <img src="../assets/img/start.jpg" id="content" class="image" />
     </div>
-    <div class="topics">Topics</div>
-    <div class="footer">Footer</div>
+ -->
+
+    <div class="content">
+        <video controls>
+            <source src="../assets/video/passwords.mp4" type="video/mp4">
+        </video>
+    </div>
+
+
+    <div class="topics">
+
+            <div class="thumbnailContainer">
+                <div class="thumbnailWrapper">
+                    <img class="thumbnail" src="../assets/img/thumbnails/1.jpg">
+                    <div class="thumbnailCaption">IOT</div>
+                </div>
+            </div>
+
+            <div id="timer">Time</div>
+            <div class="topic" id="topic0">Topic 0</div>
+            <div class="topic" id="topic1">Topic 1</div>
+            <div class="topic" id="topic2">Topic 2</div>
+            <div class="topic" id="topic3">Topic 3</div>
+            <div class="topic" id="topic4">Topic 4</div>
+            <div class="topic" id="topic5">Topic 5</div>
+            <div class="topic" id="topic6">Topic 6</div>
+            <div class="topic" id="topic6">Topic 7</div>            
+    </div>
+    <div class="footer"><div class="footerTitle">Footer</div></div>
 
 </div>
 

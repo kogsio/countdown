@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>flex exploration</title>
+
+<style>
+
+body{
+	font-size: 24px;
+	color: white;
+	height: 100vh;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	margin: 0px;
+}
+.flex-main{
+	display: flex;
+	flex: 1;
+}
+.flex-article{
+	background-color:lightblue;
+	flex-grow: 7;
+}
+.flex-aside{
+	background-color: black;
+	flex-grow: 1;	
+}
+.flex-footer{
+	background-color: orange;
+    font-size: 2vw;
+    padding: 2vw;
+}
+/*img {max-width:100%;}*/
+
+        .item{
+            background: #DC4533; /* 992D49 */
+            padding: 10px;
+            text-align: left;
+            font-family: "Arial Narrow", Helvetica, sans-serif;
+            font-size: 3vw;
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin: 2px;
+        }
+        #timer{
+            background:#333333;
+            text-align: center;
+            /*font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;*/
+        }
+
+
+    #thumbnail{
+        display: block;
+        width: 100%; 
+    }
+
+
+</style>
+
+</head>
+<body>
+
+<main class="flex-main">
+	<article class="flex-article">article</article>
+	<aside class="flex-aside">
+	    <main class="content">
+          	<!-- <img id="thumbnail" src="../assets/img/thumbnails/splash.jpg">	    	 -->
+	        <div class="item" id="timer">Time</div>
+	        <div class="item" id="topic0">Topic 0</div>
+	        <div class="item" id="topic1">Topic 1</div>
+	        <div class="item" id="topic2">Topic 2</div>
+	        <div class="item" id="topic3">Topic 3</div>
+	        <div class="item" id="topic4">Topic 4</div>
+<!-- 	        <div class="item" id="topic5">Topic 5</div>
+	        <div class="item" id="topic6">Topic 6</div>
+	        <div class="item" id="topic7">Topic 7</div>
+ -->	    </main>
+	</aside>
+</main>
+<footer class="flex-footer">footer</footer>
+
+</body>
+</html>

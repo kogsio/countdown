@@ -34,16 +34,18 @@ function sendMsg(msg) {
   console.log(`Sent: ${msg}`);
 };
 
-// broadcast overlay video events
-var overlayVideo = document.getElementById('overlayVideo');    
-overlayVideo.addEventListener('play', (event) => sendEvent(0, 'overlayVideoPlay'));
-overlayVideo.addEventListener('pause', (event) => sendEvent(0, 'overlayVideoPause'));
+function setupVideoEventBroadcast(){
+  // broadcast overlay video events
+  var overlayVideo = document.getElementById('overlayVideo');    
+  overlayVideo.addEventListener('play', (event) => sendEvent(0, 'overlayVideoPlay'));
+  overlayVideo.addEventListener('pause', (event) => sendEvent(0, 'overlayVideoPause'));
 
-// broadcast content video events
-var contentVideo = document.getElementById('contentVideo');    
-contentVideo.addEventListener('play', (event) => sendEvent(0, 'contentVideoPlay'));
-contentVideo.addEventListener('pause', (event) => sendEvent(0, 'contentVideoPause'));
-
+  // broadcast content video events
+  var contentVideo = document.getElementById('contentVideo');    
+  contentVideo.addEventListener('play', (event) => sendEvent(0, 'contentVideoPlay'));
+  contentVideo.addEventListener('pause', (event) => sendEvent(0, 'contentVideoPause'));
+}
+setupVideoEventBroadcast();
 
 // function sendEvent(id, method){
 //   sendMsg(`{"id":${id}, "method": "${method}"}`);

@@ -230,6 +230,16 @@ function closeOverlay(){
     document.getElementById('overlay').style.visibility = 'hidden';
 }
 
+// close overlay at end of video
+function closeOverlayVideoEvent(){
+    var overlayVideo = document.getElementById('overlayVideo');    
+    overlayVideo.addEventListener('ended', (event) => {
+        closeOverlay();
+        sendEvent(0, 'closeVideoOverlay')
+    });
+}
+closeOverlayVideoEvent();
+
 // black screen on
 function blackScreen(){
     // broadcast event to following browsers    

@@ -46,20 +46,21 @@ function init() {
     var contentVideo = document.getElementById('contentVideo');
 
     if(data.method == 'overlayVideoPlay'){
-      console.log('ping 01')
       overlayVideo.play();
     }
     if(data.method == 'overlayVideoPause'){
-      console.log('ping 02')      
       overlayVideo.pause();
     }
     if(data.method == 'contentVideoPlay'){
-      console.log('ping 03')      
       contentVideo.play();
     }
     if(data.method == 'contentVideoPause'){
-      console.log('ping 04')      
       contentVideo.pause();
+    }
+
+    // close video overlay
+    if(data.method == 'closeVideoOverlay'){
+      closeOverlay();
     }
 
 

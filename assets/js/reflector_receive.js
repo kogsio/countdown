@@ -23,6 +23,8 @@ function init() {
     // console.log(event.data);    
     // console.log('id:', data.id);
     // console.log('method:', data.method);
+
+    // keyboard navigation
     if(data.method == 'activate'){
       activate(data.id);
     }
@@ -38,6 +40,28 @@ function init() {
     if(data.method == 'blackScreen'){
       blackScreen();
     }    
+
+    // video control
+    var overlayVideo = document.getElementById('overlayVideo');    
+    var contentVideo = document.getElementById('contentVideo');
+
+    if(data.method == 'overlayVideoPlay'){
+      console.log('ping 01')
+      overlayVideo.play();
+    }
+    if(data.method == 'overlayVideoPause'){
+      console.log('ping 02')      
+      overlayVideo.pause();
+    }
+    if(data.method == 'contentVideoPlay'){
+      console.log('ping 03')      
+      contentVideo.play();
+    }
+    if(data.method == 'contentVideoPause'){
+      console.log('ping 04')      
+      contentVideo.pause();
+    }
+
 
   };
 

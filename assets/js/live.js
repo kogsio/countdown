@@ -230,6 +230,7 @@ function closeOverlay(){
     document.getElementById('overlay').style.visibility = 'hidden';
 }
 
+// black screen on
 function blackScreen(){
     // broadcast event to following browsers    
     sendEvent(0, 'blackScreen');
@@ -238,3 +239,4 @@ function blackScreen(){
     document.getElementById('overlay').style.visibility = 'visible';
     document.getElementById('overlay').innerText = '';
 }
+
